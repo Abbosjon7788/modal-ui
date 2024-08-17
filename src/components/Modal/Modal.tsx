@@ -29,9 +29,7 @@ export const Modal = (props: ModalProps) => {
   React.useEffect(() => {
     if (isOpen) {
       setShowModal(true);
-      setTimeout(() => {
-        modalRef.current?.focus();
-      }, 10); // Ensure focus happens after the transition starts
+      modalRef.current?.focus();
     } else {
       setShowModal(false);
     }
