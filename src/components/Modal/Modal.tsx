@@ -1,19 +1,27 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { twMerge } from "tailwind-merge";
+
+import { ModalBody } from "./ModalBody";
+import { ModalHeader } from "./ModalHeader";
+import { ModalFooter } from "./ModalFooter";
+import { ModalBackground } from "./ModalBackground";
+import { ModalCloseButton } from "./ModalCloseButton";
 
 // ----------------------------------------------------------------
 
 type ModalProps = {
   isOpen: boolean;
   onClose: VoidFunction;
-  title: string;
   children: React.ReactNode;
+  shouldCloseOutsideClick?: boolean;
+  hasCloseIcon?: boolean;
 };
 
 // ----------------------------------------------------------------
 
 export const Modal = (props: ModalProps) => {
-  const { isOpen, onClose, title, children } = props;
+  const { isOpen, onClose, children, shouldCloseOutsideClick, hasCloseIcon = true } = props;
 
   const [showModal, setShowModal] = React.useState(false);
   const modalRef = React.useRef<HTMLDivElement | null>(null);
@@ -35,27 +43,33 @@ export const Modal = (props: ModalProps) => {
     }
   };
 
+  const handleOutsideClick = () => {
+    if (shouldCloseOutsideClick) {
+      onClose();
+    }
+  };
+
   if (!isOpen && !showModal) return null;
 
   return ReactDOM.createPortal(
-    <div ref={modalRef} role="dialog" aria-modal="true" aria-labelledby="modal-title" tabIndex={-1} onKeyDown={handleKeyDown} onClick={onClose} onTransitionEnd={() => !isOpen && setShowModal(false)} className={`fixed inset-0 z-50 flex items-center justify-center bg-[#0C111D] bg-opacity-70 transition-opacity duration-300 ${isOpen ? "opacity-100" : "opacity-0"}`}>
-      <div className={`bg-white rounded-lg overflow-hidden shadow-xl max-w-lg w-full transform transition-transform duration-300 ${isOpen ? "animate-modalIn" : "animate-modalOut"}`}>
-        <header className="flex justify-between items-center p-4 border-b">
-          <h2 id="modal-title" className="text-lg font-semibold">
-            {title}
-          </h2>
-          <button onClick={onClose} aria-label="Close modal" className="text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded">
-            &times;
-          </button>
-        </header>
-        <div className="p-4">{children}</div>
-        <footer className="flex justify-end p-4 border-t">
-          <button onClick={onClose} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
-            Close
-          </button>
-        </footer>
+    <div ref={modalRef} role="dialog" aria-modal="true" aria-labelledby="modal-title" tabIndex={-1} onKeyDown={handleKeyDown} onClick={handleOutsideClick} onTransitionEnd={() => !isOpen && setShowModal(false)} className={twMerge("fixed inset-0 z-50 flex items-center justify-center bg-[#0C111D] bg-opacity-70 px-4 transition-opacity duration-300", isOpen ? "opacity-100" : "opacity-0")}>
+      <div
+        onClick={(event) => {
+          event.stopPropagation();
+        }}
+        className={twMerge("bg-base-white relative rounded-xl overflow-hidden shadow-xl max-w-[640px] w-full transform transition-transform duration-300", isOpen ? "animate-modalIn" : "animate-modalOut")}
+      >
+        <ModalBackground />
+        {hasCloseIcon && <ModalCloseButton handleClose={onClose} />}
+        {children}
       </div>
     </div>,
     document.getElementById("portal")!
   );
 };
+
+// ----------------------------------------------------------------
+
+Modal.Header = ModalHeader;
+Modal.Body = ModalBody;
+Modal.Footer = ModalFooter;

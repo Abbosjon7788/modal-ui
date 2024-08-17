@@ -7,7 +7,8 @@ export default {
         // Shadows/shadow-xs
         // xs: "0 1px 2px 0 #1018280D",
         // Shadows/shadow-xs-skeuomorphic
-        // "xs-skeuomorphic": "0 1px 2px 0 #1018280D, 0 -2px 0 0 #1018280D, 0 0 0 1 #1018282E",
+        // "xs-skeuomorphic": "0 1px 2px 0 #1018280D, 0 -2px 0 0 #1018280D, 0 0 0 1 #1018282E",\
+        xl: "0 8px 8px -4px #10182808, 0 20px 24px -4px #10182814",
       },
       borderRadius: {
         none: "0rem",
