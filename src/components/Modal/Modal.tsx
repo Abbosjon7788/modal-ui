@@ -1,12 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-interface ModalProps {
+// ----------------------------------------------------------------
+
+type ModalProps = {
   isOpen: boolean;
   onClose: VoidFunction;
   title: string;
   children: React.ReactNode;
-}
+};
+
+// ----------------------------------------------------------------
 
 export const Modal = (props: ModalProps) => {
   const { isOpen, onClose, title, children } = props;
@@ -34,7 +38,7 @@ export const Modal = (props: ModalProps) => {
   if (!isOpen && !showModal) return null;
 
   return ReactDOM.createPortal(
-    <div ref={modalRef} role="dialog" aria-modal="true" aria-labelledby="modal-title" tabIndex={-1} onKeyDown={handleKeyDown} onClick={onClose} onTransitionEnd={() => !isOpen && setShowModal(false)} className={`fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 transition-opacity duration-300 ${isOpen ? "opacity-100" : "opacity-0"}`}>
+    <div ref={modalRef} role="dialog" aria-modal="true" aria-labelledby="modal-title" tabIndex={-1} onKeyDown={handleKeyDown} onClick={onClose} onTransitionEnd={() => !isOpen && setShowModal(false)} className={`fixed inset-0 z-50 flex items-center justify-center bg-[#0C111D] bg-opacity-70 transition-opacity duration-300 ${isOpen ? "opacity-100" : "opacity-0"}`}>
       <div className={`bg-white rounded-lg overflow-hidden shadow-xl max-w-lg w-full transform transition-transform duration-300 ${isOpen ? "animate-modalIn" : "animate-modalOut"}`}>
         <header className="flex justify-between items-center p-4 border-b">
           <h2 id="modal-title" className="text-lg font-semibold">
@@ -52,6 +56,6 @@ export const Modal = (props: ModalProps) => {
         </footer>
       </div>
     </div>,
-    document.body
+    document.getElementById("portal")!
   );
 };
