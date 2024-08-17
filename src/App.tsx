@@ -3,6 +3,7 @@ import React from "react";
 import { Modal } from "./components/Modal";
 import { Button } from "./components/Button";
 import { Input } from "./components/Input";
+import { TextArea } from "./components/TextArea";
 
 import SaveSVG from "./assets/icons/save.svg";
 import SearchSVG from "./assets/icons/search.svg";
@@ -45,6 +46,7 @@ export const App = () => {
               <Input name="location" label="Location" icon={<SearchSVG />} placeholder="Search for city" />
             </div>
             <Input name="title-2" label="Title" placeholder="What is your title?" className="mb-4" />
+            <TextArea name="description" label="Description" placeholder="e.g. I joined Stripe’s Customer Success team to help them scale their checkout product. I focused mainly on onboarding new customers and resolving complaints." hasHelpIcon />
           </Modal.Body>
           <Modal.Footer className="flex items-center gap-3">
             <Button variant="secondary-gray" icon={<SaveSVG />} iconLeading size="lg" className="w-full">
