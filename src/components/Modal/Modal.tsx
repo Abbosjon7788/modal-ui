@@ -57,9 +57,11 @@ export const Modal = (props: ModalProps) => {
         }}
         className={twMerge("bg-base-white relative rounded-xl overflow-hidden shadow-xl max-w-[640px] w-full transform transition-transform duration-300", isOpen ? "animate-modalIn" : "animate-modalOut")}
       >
-        <ModalBackground />
-        {hasCloseIcon && <ModalCloseButton handleClose={onClose} />}
-        {children}
+        <div className="max-h-[748px] 2xl:max-h-[85vh] overflow-y-auto">
+          <ModalBackground />
+          {hasCloseIcon && <ModalCloseButton handleClose={onClose} />}
+          {children}
+        </div>
       </div>
     </div>,
     document.getElementById("portal")!
