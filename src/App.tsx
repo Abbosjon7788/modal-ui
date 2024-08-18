@@ -4,6 +4,7 @@ import { Modal } from "./components/Modal";
 import { Button } from "./components/Button";
 import { Input } from "./components/Input";
 import { TextArea } from "./components/TextArea";
+import { Dropdown } from "./components/Dropdown";
 
 import SaveSVG from "./assets/icons/save.svg";
 import SearchSVG from "./assets/icons/search.svg";
@@ -38,12 +39,29 @@ export const App = () => {
         <form onSubmit={handleSubmit}>
           <Modal.Body>
             <Input name="title-1" autoFocus label="Title" placeholder="What is your title?" className="mb-4" />
-            <div className="flex items-center gap-4 mb-4">
+            <div className="grid grid-cols-2 items-center gap-4 mb-4">
               <Input name="company" label="Company" icon={<SearchSVG />} placeholder="Search for company" />
               <Input name="website" prefix="https://" label="Website" placeholder="www.example.com" />
             </div>
-            <div className="flex items-center gap-4 mb-4">
+            <div className="grid grid-cols-2 items-center gap-4 mb-4">
               <Input name="location" label="Location" icon={<SearchSVG />} placeholder="Search for city" />
+              <Dropdown
+                label="Employment"
+                options={[
+                  {
+                    id: 1,
+                    label: "Full time",
+                  },
+                  {
+                    id: 2,
+                    label: "Part time",
+                  },
+                  {
+                    id: 3,
+                    label: "Remote",
+                  },
+                ]}
+              />
             </div>
             <Input name="title-2" label="Title" placeholder="What is your title?" className="mb-4" />
             <TextArea name="description" label="Description" placeholder="e.g. I joined Stripe’s Customer Success team to help them scale their checkout product. I focused mainly on onboarding new customers and resolving complaints." hasHelpIcon />

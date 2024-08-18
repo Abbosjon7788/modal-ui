@@ -50,7 +50,7 @@ export const Modal = (props: ModalProps) => {
   if (!isOpen && !showModal) return null;
 
   return ReactDOM.createPortal(
-    <div ref={modalRef} role="dialog" aria-modal="true" aria-labelledby="modal-title" tabIndex={-1} onKeyDown={handleKeyDown} onClick={handleOutsideClick} onTransitionEnd={() => !isOpen && setShowModal(false)} className={twMerge("fixed inset-0 z-50 flex items-center justify-center bg-[#0C111D] bg-opacity-70 px-4 transition-opacity duration-300", isOpen ? "opacity-100" : "opacity-0")}>
+    <div ref={modalRef} role="dialog" aria-modal="true" aria-labelledby="modal-title" tabIndex={-1} onKeyDown={handleKeyDown} onClick={handleOutsideClick} onTransitionEnd={() => !isOpen && setShowModal(false)} className={twMerge("fixed inset-0 z-40 flex items-center justify-center bg-[#0C111D] bg-opacity-70 px-4 transition-opacity duration-300", isOpen ? "opacity-100" : "opacity-0")}>
       <div
         onClick={(event) => {
           event.stopPropagation();
