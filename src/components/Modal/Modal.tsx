@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { twMerge } from "tailwind-merge";
 
+import { useLockBodyScroll } from "../../hooks/useLockBodyScroll";
+
 import { ModalBody } from "./ModalBody";
 import { ModalHeader } from "./ModalHeader";
 import { ModalFooter } from "./ModalFooter";
@@ -34,6 +36,8 @@ export const Modal = (props: ModalProps) => {
       setShowModal(false);
     }
   }, [isOpen]);
+
+  useLockBodyScroll(isOpen);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key === "Escape") {

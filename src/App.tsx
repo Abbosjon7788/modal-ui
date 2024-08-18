@@ -97,10 +97,10 @@ export const App = () => {
   const [isModalOpen, setModalOpen] = React.useState(false);
 
   React.useEffect(() => {
-    if (isDesktop) {
+    if (isDesktop || !isModalOpen) {
       setCurrentSlide(0);
     }
-  }, [isDesktop]);
+  }, [isDesktop, isModalOpen]);
 
   const handleSubmit: React.MouseEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
