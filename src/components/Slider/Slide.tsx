@@ -8,5 +8,5 @@ type SlideProps = {
 export const Slide = (props: SlideProps) => {
   const { className, children } = props;
 
-  return <li className={twMerge("min-w-full flex-shrink-0", className)}>{children}</li>;
+  return <li className={twMerge("min-w-full", className)}>{children}</li>;
 };
